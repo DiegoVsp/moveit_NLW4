@@ -10,8 +10,8 @@ export default class MyDocument extends Document {
           <link rel="preconnect" href="https://fonts.gstatic.com" />
         </Head>
         <body>
-          <Main />
-          <NextScript />
+          <Main/>
+          <NextScript/>
         </body>
       </Html>
     );
