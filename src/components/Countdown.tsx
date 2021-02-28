@@ -1,10 +1,17 @@
 import { useState, useEffect, useContext } from "react";
 import { ChallengesContext } from "../contexts/ChallengesContext";
+import { CountdownContext } from "../contexts/CountdownContext";
 import styles from "../styles/components/Countdown.module.css";
 
-
 export function Countdown() {
- 
+  const {
+    minutos,
+    segundos,
+    hasFinished,
+    isActive,
+    startCountdown,
+    resetCountdown,
+  } = useContext(CountdownContext);
   // padStart -> se não tiver 2 números ele coloca o 0 no inicio \/
   const [minuteLeft, minuteRight] = String(minutos).padStart(2, "0").split("");
   const [secondLeft, secondRight] = String(segundos).padStart(2, "0").split("");
@@ -24,35 +31,30 @@ export function Countdown() {
       </div>
 
       {hasFinished ? (
-        <button
-          disabled
-          className={styles.countdownButton}
-        >
+        <button disabled className={styles.countdownButton}>
           Ciclo Encerrado
         </button>
       ) : (
-          <>
-            {isActive ? (
-              <button
-                onClick={resetCountdown}
-                type="button"
-                className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
-              >
-                Abandonar ciclo
-              </button>
-            ) : (
-                <button
-                  onClick={startCountdown}
-                  type="button"
-                  className={styles.countdownButton}
-                >
-                  Iniciar um Ciclo
-                </button>
-              )}
-          </>
-        )}
-
-
+        <>
+          {isActive ? (
+            <button
+              onClick={resetCountdown}
+              type="button"
+              className={`${styles.countdownButton} ${styles.countdownButtonActive}`}
+            >
+              Abandonar ciclo
+            </button>
+          ) : (
+            <button
+              onClick={startCountdown}
+              type="button"
+              className={styles.countdownButton}
+            >
+              Iniciar um Ciclo
+            </button>
+          )}
+        </>
+      )}
     </div>
   );
 }
